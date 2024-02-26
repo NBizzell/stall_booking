@@ -1,6 +1,6 @@
 import axios from "axios";
 // const url = "http://localhost:3001/";
-const url = "https://stannington-backend.onrender.com/";
+const url = "https://stall-booking-backend.onrender.com/";
 console.log("test");
 
 export class ApiClient {
