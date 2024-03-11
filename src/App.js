@@ -13,7 +13,7 @@ import NewBooking from "./components/NewBooking";
 import NewStaff from "./components/NewStaff";
 import PrivateRoute from "./components/PrivateRoute";
 import Register from "./components/Register";
-import ShowcaseItem from "./components/ShowcaseItem";
+// import ShowcaseItem from "./components/ShowcaseItem";
 import StaffPortal from "./components/StaffPortal";
 import ViewBookings from "./components/ViewBookings";
 import "./images/classic-cars.jpg";
@@ -77,11 +77,6 @@ const App = () => {
 								<div className="centered" style={{ marginTop: "1rem" }}>
 									<article className="hero-banner">
 										<div className="fb row gap-2">
-											<img
-												className="hero-image"
-												src="https://scontent.flba3-1.fna.fbcdn.net/v/t31.18172-8/11336962_880084938714620_1833581849408480907_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=q5_GZ5xh8cAAX8gN3K_&_nc_ht=scontent.flba3-1.fna&oh=00_AfC28v3-9Br_GjTuSkog9qQJfh71ru92p5p7wGvqj3JUbQ&oe=63B986D0"
-												alt="carnival"
-											/>
 											<div>
 												<h1 className="mg-0" style={{ fontSize: "29px" }}>
 													About the Carnival{" "}
@@ -105,18 +100,20 @@ const App = () => {
 													people together. <br /> <br /> Thousands of visitors
 													come each year. So, why not join them and see it for
 													yourself?
+													<br /> <br />
+													To book a stall register using the link above then use the boking system to book a stall.
 												</p>
 											</div>
 										</div>
 									</article>
 								</div>
 							</div>
-							<hr className="newhr" />
+								{/* <hr className="newhr" />
 							<h2
 								className="header-font mg-2"
 								style={{ fontSize: "32px", marginBottom: 0 }}
 							>
-								Get Involved!
+							 Get Involved!
 							</h2>
 							<div className="fb row showcase gap-4">
 								<ShowcaseItem
@@ -146,7 +143,7 @@ const App = () => {
 									title="Placeholder"
 									body="We have a large selection of Classic Cars on display every year - if you own a classic car and would like to display it, Stannington Carnival would be happy to have you."
 								/>
-							</div>
+							</div> */}
 							<hr className="newhr" />
 							<h2 className="header-font mg-2" style={{ fontSize: "32px" }}>
 								Where are we?
@@ -185,12 +182,6 @@ const App = () => {
 													Booking Enquiries:
 												</span>
 												&nbsp;stanningtoncarnival@gmail.com
-											</p>
-											<p className="mg-0">
-												<span style={{ fontWeight: "bold" }}>
-													General Enquiries:
-												</span>
-												&nbsp;jvantinteren@yahoo.co.uk
 											</p>
 										</div>
 									</section>
