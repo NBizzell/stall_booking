@@ -67,6 +67,23 @@ const NewBooking = (props) => {
 				<div className="title header-font centered">
 					<h1>Booking Registration</h1>
 				</div>
+				<div>
+					<h2>Before you book</h2>
+					<p>please be aware of the following information:
+					<ul>
+						<li>The event is outside on a field </li> 
+						<li>We are expecting 500 - 1000 attendees </li>
+						<li>Your pitch size is 3mx3m with a parking space behind the stall </li>
+						<li>You will be allocated an arrival window between 09:30-10:30am to ensure safe and controlled vehicle movement </li>
+						<li>If you require the use of power you must supply your own generator. We will be limiting the amount of generators on site.</li> 
+						<li>You will need to provide your own equipment such as tables, chairs and a marquee, we can't provide shelter in the event of wet weather</li>
+						<li>Marquess need to be secured with guy ropes </li>
+						<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
+						<li>We have a limited amount of stalls available for non profits organisations at a reduced rate </li>
+						</ul>
+	         Sound good? Great, make your booking using the form below
+					 </p>
+				</div>
 				<form onSubmit={(event) => submitHandler(event)}>
 					<div className="fb col booking-form">
 						<label>
