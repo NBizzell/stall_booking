@@ -101,7 +101,7 @@ const App = () => {
 													come each year. So, why not join them and see it for
 													yourself?
 													<br /> <br />
-													To book a stall register using the link above then use the boking system to book a stall.
+													To book a stall register using the link above then use the booking system to book a stall.
 												</p>
 											</div>
 										</div>
