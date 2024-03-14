@@ -9,6 +9,7 @@ import {
 	FaRegCalendarAlt,
 	FaTimesCircle,
 	FaUserAlt,
+	FaSourcetree,
 } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { GiSewingNeedle } from "react-icons/gi";
@@ -39,7 +40,7 @@ const BookingCard = (props) => {
 	const bookingTypes = {
 		craft: {
 			icon: <GiSewingNeedle />,
-			colour: "#1cbb55" /* Green */,
+			colour: "#c5c" /* pink */,
 		},
 		charity: {
 			icon: <FaHeart />,
@@ -48,6 +49,10 @@ const BookingCard = (props) => {
 		commercial: {
 			icon: <FaHandshake />,
 			colour: "#1c65bb" /* Blue */,
+		},
+		greenfair: {
+			icon: <FaSourcetree />,
+			colour: "#1cbb55" /* Green */,
 		},
 	};
 
