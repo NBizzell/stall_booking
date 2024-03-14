@@ -69,7 +69,7 @@ const NewBooking = (props) => {
 				</div>
 				<div>
 					<h2>Before you book</h2>
-					<p>please be aware of the following information:
+					<p>Please be aware of the following information:
 					<ul>
 						<li>The event is outside on a field </li> 
 						<li>We are expecting 500 - 1000 attendees </li>
@@ -81,7 +81,7 @@ const NewBooking = (props) => {
 						<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
 						<li>We have a limited amount of stalls available for non profits organisations at a reduced rate </li>
 						</ul>
-	         Sound good? Great, make your booking using the form below
+	         Sound good? Great, make your booking using the form below:
 					 </p>
 				</div>
 				<form onSubmit={(event) => submitHandler(event)}>
