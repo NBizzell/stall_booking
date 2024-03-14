@@ -9,10 +9,11 @@ const NewBooking = (props) => {
 		business: "",
 		email: "",
 		telephone: "",
-		type: "",
+		type: "Commercial",
 		comments: "",
 		status: "unpaid",
 		pitchNo: -1,
+		tac: false
 	});
 
 	toastr.options = {
@@ -93,19 +94,20 @@ const NewBooking = (props) => {
 							<input
 								type="radio"
 								name="type"
-								value="Craft"
+								value="Commercial"
 								onChange={(event) => changeHandler(event)}
+								checked
 							/>
-							Craft
+							For profit / standard stall
 						</label>
 						<label>
 							<input
 								type="radio"
 								name="type"
-								value="Commercial"
+								value="Catering"
 								onChange={(event) => changeHandler(event)}
 							/>
-							Commercial
+							Catering
 						</label>
 						<label>
 							<input
@@ -115,7 +117,18 @@ const NewBooking = (props) => {
 								onChange={(event) => changeHandler(event)}
 								required
 							/>
-							Charity
+							Charity / non profit
+						</label>
+
+						<label>
+							<input
+								type="radio"
+								name="type"
+								value="GreenFair"
+								onChange={(event) => changeHandler(event)}
+								required
+							/>
+							Green Fair
 						</label>
 
 						<h2 className="header-font">Business/Charity name</h2>
@@ -171,6 +184,18 @@ const NewBooking = (props) => {
 							onChange={(event) => changeHandler(event)}
 							placeholder="Enter your comment here..."
 						/>
+						<h2 className="header-font">Terms and Conditions</h2>
+						<label>
+						<input
+							//className="form-input"
+							name="terms"
+							type="checkbox"
+							value={bookingDetails.tac}
+							onChange={(event) => changeHandler(event)}
+							required
+						/>
+						I agree to the terms and conditions
+						</label>
 						<div className="centered">
 							<button
 								className="btn"
