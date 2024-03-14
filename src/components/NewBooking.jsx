@@ -9,7 +9,7 @@ const NewBooking = (props) => {
 		business: "",
 		email: "",
 		telephone: "",
-		type: "",
+		type: "Commercial",
 		comments: "",
 		status: "unpaid",
 		pitchNo: -1,
@@ -94,19 +94,20 @@ const NewBooking = (props) => {
 							<input
 								type="radio"
 								name="type"
-								value="Craft"
+								value="Commercial"
 								onChange={(event) => changeHandler(event)}
+								checked
 							/>
-							Craft
+							For profit / standard stall
 						</label>
 						<label>
 							<input
 								type="radio"
 								name="type"
-								value="Commercial"
+								value="Catering"
 								onChange={(event) => changeHandler(event)}
 							/>
-							Commercial
+							Catering
 						</label>
 						<label>
 							<input
@@ -116,7 +117,7 @@ const NewBooking = (props) => {
 								onChange={(event) => changeHandler(event)}
 								required
 							/>
-							Charity
+							Charity / non profit
 						</label>
 
 						<label>
