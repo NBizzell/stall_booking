@@ -1,6 +1,6 @@
 import axios from "axios";
 // const url = "http://localhost:3001/";
-const url = "https://stall-booking-backend.onrender.com/";
+const url = "https://stall-booking-api.azurewebsites.net/";
 console.log("test");
 
 export class ApiClient {
@@ -82,6 +82,7 @@ export class ApiClient {
 
 	// Add booking
 	addBooking(booking) {
+		console.log(booking);
 		return this.apiCall("post", `${url}bookings`, {
 			...booking,
 		}).catch((error) => {

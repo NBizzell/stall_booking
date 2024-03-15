@@ -11,6 +11,7 @@ import {
 	FaUserAlt,
 	FaSourcetree,
 	FaHamburger,
+	FaStore,
 } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { GiSewingNeedle } from "react-icons/gi";
@@ -35,6 +36,7 @@ const BookingCard = (props) => {
 		email: props.email,
 		telephone: props.telephone,
 		type: props.type,
+		description: props.description,
 		comments: props.comments,
 	});
 
@@ -101,6 +103,7 @@ const BookingCard = (props) => {
 			email: props.email,
 			telephone: props.telephone,
 			type: props.type,
+			description: props.description,
 			comments: props.comments,
 			status: props.status,
 			userId: props.userId,
@@ -130,6 +133,7 @@ const BookingCard = (props) => {
 			email: props.email,
 			type: props.type,
 			telephone: props.telephone,
+			description:props.description,
 			comments: props.comments,
 		});
 	};
@@ -245,6 +249,17 @@ const BookingCard = (props) => {
 							onChange={(event) => formChangeHandler(event)}
 						/>
 						<textarea
+							placeholder="Stall description"
+							className="form-input auto-width"
+							value={editableFields.description}
+							style={{
+								minHeight: "3rem",
+								maxHeight: "3rem",
+							}}
+							name="description"
+							onChange={(event) => formChangeHandler(event)}
+						/>
+						<textarea
 							placeholder="Additional Comments"
 							className="form-input auto-width"
 							value={editableFields.comments}
@@ -284,6 +299,11 @@ const BookingCard = (props) => {
 									{String(new Date(props.date * 1000)).slice(0, -34)}
 								</p>
 							</div>
+							<p className="card-contact-info card-comments">
+									<FaStore />
+									&nbsp;
+									{props.description}
+								</p>
 							{props.comments && props.comments.toLowerCase() !== "no" ? (
 								<p className="card-contact-info card-comments">
 									<FaComments />
@@ -323,6 +343,7 @@ const BookingCard = (props) => {
 											telephone: props.telephone,
 											type: props.type,
 											comments: props.comments,
+											description: props.description,
 											status: props.status,
 											userId: props.userId,
 											pitchNo: props.pitchNo,

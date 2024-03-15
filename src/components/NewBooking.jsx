@@ -10,6 +10,7 @@ const NewBooking = (props) => {
 		email: "",
 		telephone: "",
 		type: "Commercial",
+		description: "",
 		comments: "",
 		status: "unpaid",
 		pitchNo: -1,
@@ -31,6 +32,7 @@ const NewBooking = (props) => {
 	};
 
 	const submitHandler = async (event) => {
+		console.log(bookingDetails.description);
 		event.preventDefault();
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
@@ -42,6 +44,7 @@ const NewBooking = (props) => {
 				email: bookingDetails.email,
 				telephone: bookingDetails.telephone,
 				type: bookingDetails.type,
+				description: bookingDetails.description,
 				comments: bookingDetails.comments,
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
@@ -70,7 +73,7 @@ const NewBooking = (props) => {
 				</div>
 				<div>
 					<h2>Before you book</h2>
-					<p>Please be aware of the following information:
+					<p>Please be aware of the following information:</p>
 					<ul>
 						<li>The event is outside on a field </li> 
 						<li>We are expecting 500 - 1000 attendees </li>
@@ -82,8 +85,7 @@ const NewBooking = (props) => {
 						<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
 						<li>We have a limited amount of stalls available for non profits organisations at a reduced rate </li>
 						</ul>
-	         Sound good? Great, make your booking using the form below:
-					 </p>
+	        <p> Sound good? Great, make your booking using the form below:</p>
 				</div>
 				<form onSubmit={(event) => submitHandler(event)}>
 					<div className="fb col booking-form">
@@ -173,6 +175,18 @@ const NewBooking = (props) => {
 							placeholder="Phone number"
 							required
 						/>
+						<h2 className="header-font">
+							Brief stall description
+						</h2>
+						<textarea
+							className="form-input"
+							name="description"
+							type="text"
+							value={bookingDetails.description}
+							onChange={(event) => changeHandler(event)}
+							placeholder="I will be selling..."
+						/>
+
 						<h2 className="header-font">
 							Any additional information that you want to share before booking?
 						</h2>

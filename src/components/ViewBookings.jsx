@@ -65,6 +65,7 @@ const ViewBookings = (props) => {
 							email={stall.email}
 							telephone={stall.telephone}
 							type={stall.type}
+							description={stall.description}
 							comments={stall.comments}
 							status={stall.status}
 							pitchNo={stall.pitchNo}
