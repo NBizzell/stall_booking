@@ -7,6 +7,8 @@ import "./NewBooking.css";
 
 const NewBooking = (props) => {
 	const [catering, setCatering] = useState(false)
+	const [url, setUrl] = useState("");
+  const [file, setFile] = useState ("");
 	const [bookingDetails, setBookingDetails] = useState({
 		name: "",
 		business: "",
@@ -17,7 +19,8 @@ const NewBooking = (props) => {
 		comments: "",
 		status: "unpaid",
 		pitchNo: -1,
-	  authority: ""
+	  authority: "",
+		pii: ""
 	});
 
 	toastr.options = {
@@ -41,11 +44,24 @@ const NewBooking = (props) => {
 			setCatering(true)
 		}
 		changeHandler(event)
-	}
+	};
+
+	const handleFileChange = (event)=>{
+	   const file = {
+      preview: URL.createObjectURL(event.target.files[0]),
+      data: event.target.files[0],
+    };
+    setFile(file);
+	};
 
 	const submitHandler = async (event) => {
-		console.log(bookingDetails.description);
 		event.preventDefault();
+
+		let formData = new FormData();
+			formData.append("file", file.data);
+			const response = await props.client.fileUpload(formData);
+			console.log(response.data.response.data.id)
+			await setUrl(response.data.response.data.id);
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
 			: (await props.client.getUserFromToken(props.selectedUser)).data._id;
@@ -61,9 +77,10 @@ const NewBooking = (props) => {
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
 				authority: bookingDetails.authority,
+				pii: url,
 				date: Math.floor(Date.now() / 1000), //epoch timestamp
 				userId: userId,
-			});
+			});  
 			props.refresh !== undefined && props.refresh();
 			toastr["success"](
 				"Your booking has been submitted. We'll be in contact with you soon.",
@@ -166,7 +183,7 @@ const NewBooking = (props) => {
 								We are required to check the hygiene rating of all food and drink vendors
 								<input
 									className="form-input"
-									name="telephone"
+									name="authority"
 									type="text"
 									value={bookingDetails.authority}
 									onChange={(event) => changeHandler(event)}
@@ -176,6 +193,16 @@ const NewBooking = (props) => {
   						</>
 								: ''
 						}
+						   
+					  <h2 className="header-font">
+							Please upload proof of your Public Liability Insurance
+						</h2>
+            <input 
+							className="form-input"
+							name="PII"
+							type="file" 
+							onChange={handleFileChange}>
+						</input>
 
 						<h2 className="header-font">
 							Any additional information that you want to share before booking?
@@ -199,7 +226,7 @@ const NewBooking = (props) => {
 							<li>Marquess need to be secured with guy ropes </li>
 							<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
 							<li>We have a limited amount of stalls available for non profit organisations at a reduced rate </li>
-							<li>You must read and agree to our <a href = {Tac} target = "_blank">terms and conditions </a> to make a booking </li>
+							<li>You must read and agree to our <a href = {Tac} target = "_blank" rel="noreferrer">terms and conditions </a> to make a booking </li>
 						</ul>
 						<label>
 						<input

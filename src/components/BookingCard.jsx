@@ -298,12 +298,20 @@ const BookingCard = (props) => {
 									&nbsp;
 									{String(new Date(props.date * 1000)).slice(0, -34)}
 								</p>
+								<p className="contact-info-container">
+									{/* <FaPhone /> */}
+									pii
+									&nbsp;
+									<a href={`https://docs.google.com/document/d/${props.pii}`}>insurance</a> 
+								</p>
 							</div>
 							<p className="card-contact-info card-comments">
 									<FaStore />
 									&nbsp;
 									{props.description}
 								</p>
+
+
 							{props.comments && props.comments.toLowerCase() !== "no" ? (
 								<p className="card-contact-info card-comments">
 									<FaComments />

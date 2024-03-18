@@ -1,6 +1,6 @@
 import axios from "axios";
-// const url = "http://localhost:3001/";
-const url = "https://stall-booking-api.azurewebsites.net/";
+const url = "http://localhost:3001/";
+//const url = "https://stall-booking-api.azurewebsites.net/";
 
 
 export class ApiClient {
@@ -126,5 +126,10 @@ export class ApiClient {
 
 	deleteBooking(id) {
 		return this.apiCall("delete", `${url}bookings/${id}`);
+	}
+
+	fileUpload(fileData){
+    console.log(fileData);
+    return this.apiCall("post", `${url}file`,fileData);
 	}
 }
