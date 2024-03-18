@@ -1,7 +1,7 @@
 import axios from "axios";
 // const url = "http://localhost:3001/";
 const url = "https://stall-booking-api.azurewebsites.net/";
-console.log("test");
+
 
 export class ApiClient {
 	constructor(tokenProvider, logoutHandler) {

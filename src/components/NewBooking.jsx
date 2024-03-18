@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toastr from "toastr";
+import Tac from "../components/StanningtonCarnivalTAC.pdf"
 import "toastr/build/toastr.min.css";
 import "./NewBooking.css";
 
+
 const NewBooking = (props) => {
+	const [catering, setCatering] = useState(false)
 	const [bookingDetails, setBookingDetails] = useState({
 		name: "",
 		business: "",
@@ -14,7 +17,7 @@ const NewBooking = (props) => {
 		comments: "",
 		status: "unpaid",
 		pitchNo: -1,
-		tac: false
+	  authority: ""
 	});
 
 	toastr.options = {
@@ -30,6 +33,15 @@ const NewBooking = (props) => {
 		newState[fieldName] = fieldValue;
 		setBookingDetails(newState);
 	};
+
+	const typeHandler = (event)=>{
+		if (event.target.value !== 'Catering'){
+			setCatering(false)
+		} else {
+			setCatering(true)
+		}
+		changeHandler(event)
+	}
 
 	const submitHandler = async (event) => {
 		console.log(bookingDetails.description);
@@ -48,6 +60,7 @@ const NewBooking = (props) => {
 				comments: bookingDetails.comments,
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
+				authority: bookingDetails.authority,
 				date: Math.floor(Date.now() / 1000), //epoch timestamp
 				userId: userId,
 			});
@@ -65,80 +78,39 @@ const NewBooking = (props) => {
 		}
 	};
 
+	useEffect(() => {
+	},[catering])
+
 	return (
 		<div className="centered" style={{ paddingTop: "2rem" }}>
 			<div>
 				<div className="title header-font centered">
 					<h1>Booking Registration</h1>
 				</div>
-				<div>
-					<h2>Before you book</h2>
-					<p>Please be aware of the following information:</p>
-					<ul>
-						<li>The event is outside on a field </li> 
-						<li>We are expecting 500 - 1000 attendees </li>
-						<li>Your pitch size is 3mx3m with a parking space behind the stall </li>
-						<li>You will be allocated an arrival window between 09:30-10:30am to ensure safe and controlled vehicle movement </li>
-						<li>If you require the use of power you must supply your own generator. We will be limiting the amount of generators on site.</li> 
-						<li>You will need to provide your own equipment such as tables, chairs and a marquee, we can't provide shelter in the event of wet weather</li>
-						<li>Marquess need to be secured with guy ropes </li>
-						<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
-						<li>We have a limited amount of stalls available for non profits organisations at a reduced rate </li>
-						</ul>
-	        <p> Sound good? Great, make your booking using the form below:</p>
-				</div>
 				<form onSubmit={(event) => submitHandler(event)}>
 					<div className="fb col booking-form">
 						<label>
 							<h2 className="header-font">Select type of stall:</h2>
 						</label>
-						<label>
-							<input
-								type="radio"
-								name="type"
-								value="Commercial"
-								onChange={(event) => changeHandler(event)}
-								checked
-							/>
-							For profit / standard stall
-						</label>
-						<label>
-							<input
-								type="radio"
-								name="type"
-								value="Catering"
-								onChange={(event) => changeHandler(event)}
-							/>
-							Catering
-						</label>
-						<label>
-							<input
-								type="radio"
-								name="type"
-								value="Charity"
-								onChange={(event) => changeHandler(event)}
-								required
-							/>
-							Charity / non profit
-						</label>
-
-						<label>
-							<input
-								type="radio"
-								name="type"
-								value="GreenFair"
-								onChange={(event) => changeHandler(event)}
-								required
-							/>
-							Green Fair
-						</label>
+						<select 
+						  className="form-input"
+							name = 'stallType'
+							onChange = {(event) => typeHandler(event)}
+							defaultValue ='Commercial'
+						>
+						 <option value= 'Commercial'> Standard Stall </option>
+						 <option value= 'Catering'> Catering </option>
+						 <option value= 'Charity'> Charity / Non Profit </option>
+						 <option value= 'GreenFair'> Green Fair </option>
+            </select>
+						
 
 						<h2 className="header-font">Business/Charity name</h2>
 						<input
 							className="form-input"
 							name="business"
 							type="text"
-							placeholder="Business/charity name"
+							placeholder="Stall, Business or Charity Name"
 							value={bookingDetails.business}
 							onChange={(event) => changeHandler(event)}
 							required
@@ -149,7 +121,7 @@ const NewBooking = (props) => {
 							className="form-input"
 							name="name"
 							type="text"
-							placeholder="Full name"
+							placeholder="Full name of the contact for this booking"
 							value={bookingDetails.name}
 							onChange={(event) => changeHandler(event)}
 							required
@@ -161,7 +133,7 @@ const NewBooking = (props) => {
 							name="email"
 							type="email"
 							value={bookingDetails.email}
-							placeholder="Email"
+							placeholder="Email address for the stall contact above"
 							onChange={(event) => changeHandler(event)}
 							required
 						/>
@@ -172,20 +144,38 @@ const NewBooking = (props) => {
 							type="text"
 							value={bookingDetails.telephone}
 							onChange={(event) => changeHandler(event)}
-							placeholder="Phone number"
+							placeholder="Phone number for the stall contact above"
 							required
 						/>
 						<h2 className="header-font">
 							Brief stall description
 						</h2>
+						
 						<textarea
 							className="form-input"
 							name="description"
 							type="text"
 							value={bookingDetails.description}
 							onChange={(event) => changeHandler(event)}
-							placeholder="I will be selling..."
+							placeholder="Tell us about what you will be selling / doing on your stall. The information you give will help us to ensure that stalls are located appropriately"
 						/>
+
+						{catering ? 
+  						<>
+								<h2 className="header-font">Local Authority registered with for food hygiene </h2>
+								We are required to check the hygiene rating of all food and drink vendors
+								<input
+									className="form-input"
+									name="telephone"
+									type="text"
+									value={bookingDetails.authority}
+									onChange={(event) => changeHandler(event)}
+									placeholder="Please supply details of the local authority with which your business is registered"
+									required
+								/>
+  						</>
+								: ''
+						}
 
 						<h2 className="header-font">
 							Any additional information that you want to share before booking?
@@ -198,7 +188,19 @@ const NewBooking = (props) => {
 							onChange={(event) => changeHandler(event)}
 							placeholder="Enter your comment here..."
 						/>
-						<h2 className="header-font">Terms and Conditions</h2>
+						<h2 className="header-font">Important informaton before you book</h2>
+						<ul>
+							<li>The event is outside on a field </li> 
+							<li>We are expecting 500 - 1000 attendees </li>
+							<li>Your pitch size is 3mx3m with a parking space behind the stall </li>
+							<li>You will be allocated an arrival window between 09:30-10:30am to ensure safe and controlled vehicle movement </li>
+							<li>If you require the use of power you must supply your own generator. We will be limiting the amount of generators on site.</li> 
+							<li>You will need to provide your own equipment such as tables, chairs and a marquee, we can't provide shelter in the event of wet weather</li>
+							<li>Marquess need to be secured with guy ropes </li>
+							<li>Pitch fees are £40, we are also asking you to donate a prize to the raffle</li>
+							<li>We have a limited amount of stalls available for non profit organisations at a reduced rate </li>
+							<li>You must read and agree to our <a href = {Tac} target = "_blank">terms and conditions </a> to make a booking </li>
+						</ul>
 						<label>
 						<input
 							//className="form-input"
