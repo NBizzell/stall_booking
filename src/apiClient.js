@@ -82,7 +82,6 @@ export class ApiClient {
 
 	// Add booking
 	addBooking(booking) {
-		console.log(booking);
 		return this.apiCall("post", `${url}bookings`, {
 			...booking,
 		}).catch((error) => {
