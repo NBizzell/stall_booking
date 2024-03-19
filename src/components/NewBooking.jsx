@@ -57,10 +57,12 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-
-		let formData = new FormData();
-			formData.append("file", file.data);
-			const response = await props.client.fileUpload(formData);
+		const response = { data:{response:{data:{id:""}}}}
+		if (file.data) {
+		 let formData = new FormData();
+		 formData.append("file", file.data);
+		 const response = await props.client.fileUpload(formData);
+		}
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
 			: (await props.client.getUserFromToken(props.selectedUser)).data._id;
