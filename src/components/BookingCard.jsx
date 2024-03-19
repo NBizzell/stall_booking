@@ -12,9 +12,10 @@ import {
 	FaSourcetree,
 	FaHamburger,
 	FaStore,
+	FaRegFile,
+	FaRegFileExcel,
 } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-import { GiSewingNeedle } from "react-icons/gi";
 import { ImBin } from "react-icons/im";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
@@ -298,12 +299,30 @@ const BookingCard = (props) => {
 									&nbsp;
 									{String(new Date(props.date * 1000)).slice(0, -34)}
 								</p>
-								<p className="contact-info-container">
-									{/* <FaPhone /> */}
-									pii
-									&nbsp;
-									<a href={`https://docs.google.com/document/d/${props.pii}`}>insurance</a> 
-								</p>
+								{props.pii == "" ? (
+									<>
+									<p className="contact-info-container"></p>
+									<span className="warning">
+									 <FaRegFileExcel /> 
+									 No Insurance Document
+									 </span>
+									</>
+									):(
+									 <p className="contact-info-container">
+									   <FaRegFile />
+									   &nbsp;
+										 {/* https://drive.google.com/file/d/18Uwscf9LPje9Mg3nUiBwwcmKDa5Xpi_t/view?usp=drive_link
+										 https://drive.google.com/file/d/1iF85IJ9q7V1402JmKB3kF9pki6Y4pzZv/view?usp=sharing */}
+									   <a 
+									    href={`https://drive.google.com/file/d/${props.pii}/view?usp=drive_link`}
+									    target="_blank"
+									    rel="noreferrer"
+									   >
+										  Public Liability Insurance
+									   </a> 
+								  </p>
+								)}
+
 							</div>
 							<p className="card-contact-info card-comments">
 									<FaStore />

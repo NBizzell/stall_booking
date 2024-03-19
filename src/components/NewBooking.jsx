@@ -3,11 +3,10 @@ import toastr from "toastr";
 import Tac from "../components/StanningtonCarnivalTAC.pdf"
 import "toastr/build/toastr.min.css";
 import "./NewBooking.css";
-
+import { useNavigate } from "react-router-dom";
 
 const NewBooking = (props) => {
 	const [catering, setCatering] = useState(false)
-	const [url, setUrl] = useState("");
   const [file, setFile] = useState ("");
 	const [bookingDetails, setBookingDetails] = useState({
 		name: "",
@@ -22,6 +21,8 @@ const NewBooking = (props) => {
 	  authority: "",
 		pii: ""
 	});
+
+	const navigate = useNavigate()
 
 	toastr.options = {
 		positionClass: "toast-bottom-right",
@@ -60,8 +61,6 @@ const NewBooking = (props) => {
 		let formData = new FormData();
 			formData.append("file", file.data);
 			const response = await props.client.fileUpload(formData);
-			console.log(response.data.response.data.id)
-			await setUrl(response.data.response.data.id);
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
 			: (await props.client.getUserFromToken(props.selectedUser)).data._id;
@@ -77,7 +76,7 @@ const NewBooking = (props) => {
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
 				authority: bookingDetails.authority,
-				pii: url,
+				pii: response.data.response.data.id,
 				date: Math.floor(Date.now() / 1000), //epoch timestamp
 				userId: userId,
 			});  
@@ -86,6 +85,7 @@ const NewBooking = (props) => {
 				"Your booking has been submitted. We'll be in contact with you soon.",
 				"Success!"
 			);
+			navigate('/bookings/view')
 		} catch (error) {
 			toastr["error"](
 				"Something has gone wrong while submitting your booking, please contact us directly.",

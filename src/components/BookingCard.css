@@ -78,3 +78,7 @@
 	margin: 0.5rem 0rem 0rem 0rem;
 	background-color: #fafafa;
 }
+
+.warning {
+	color: crimson;
+}
