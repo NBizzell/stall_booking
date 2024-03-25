@@ -260,7 +260,7 @@ const NewBooking = (props) => {
 							type="text"
 							value={bookingDetails.comments}
 							onChange={(event) => changeHandler(event)}
-							placeholder="Enter your comment here..."
+							placeholder="Please let us know anything else you think will be useful....."
 						/>
 						<h2 className="header-font">Important informaton before you book</h2>
 						<ul>
