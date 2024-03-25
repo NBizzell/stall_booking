@@ -57,11 +57,15 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		const response = { data:{response:{data:{id:""}}}}
+		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
+		let response = { data:{response:{data:{id:""}}}}
+		const namedate = bookingDetails.name + dtstamp 
 		if (file.data) {
 		 let formData = new FormData();
 		 formData.append("file", file.data);
-		 const response = await props.client.fileUpload(formData);
+		 formData.append("name", namedate);
+		 console.log(formData)
+		 response = await props.client.fileUpload(formData);
 		}
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
@@ -79,7 +83,7 @@ const NewBooking = (props) => {
 				pitchNo: bookingDetails.pitchNo,
 				authority: bookingDetails.authority,
 				pii: response.data.response.data.id,
-				date: Math.floor(Date.now() / 1000), //epoch timestamp
+				date: dtstamp,
 				userId: userId,
 			});  
 			props.refresh !== undefined && props.refresh();

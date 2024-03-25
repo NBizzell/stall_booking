@@ -299,7 +299,7 @@ const BookingCard = (props) => {
 									&nbsp;
 									{String(new Date(props.date * 1000)).slice(0, -34)}
 								</p>
-								{props.pii == "" ? (
+								{props.pii === "" ? (
 									<>
 									<p className="contact-info-container"></p>
 									<span className="warning">
