@@ -19,7 +19,6 @@ const Allocation = (props) => {
 	};
 
 	const changePitchNo = async (event) => {
-		console.log(dropdownSelection);
 		event.preventDefault();
 		if (!(dropdownSelection > 0)) {
 			toastr["error"]("Pitch number must be a positive number!", "Error!");

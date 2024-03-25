@@ -12,13 +12,11 @@ const Committee = (props) => {
 	useEffect(() => {
 		const callApi = async () => {
 			setProportions((await props.client.getProportions()).data);
-			console.log(proportions);
 			setTotalAssigned(
 				(await props.client.getTotalAssigned()).data["allocated stalls"]
 			);
 			setTotalBookingsCount((await props.client.getAllBookings()).data.length);
 		};
-		callApi();
 		callApi();
 		/*eslint-disable*/
 	}, [props.client, props.token]);
