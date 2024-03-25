@@ -11,9 +11,11 @@ import {
 	FaUserAlt,
 	FaSourcetree,
 	FaHamburger,
+	FaStore,
+	FaRegFile,
+	FaRegFileExcel,
 } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-import { GiSewingNeedle } from "react-icons/gi";
 import { ImBin } from "react-icons/im";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
@@ -29,12 +31,14 @@ toastr.options = {
 const BookingCard = (props) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [isEditable, setIsEditable] = useState(false);
+	const [pliDate, setPliDate] = useState()
 	const [editableFields, setEditableFields] = useState({
 		business: props.business,
 		name: props.name,
 		email: props.email,
 		telephone: props.telephone,
 		type: props.type,
+		description: props.description,
 		comments: props.comments,
 	});
 
@@ -101,6 +105,7 @@ const BookingCard = (props) => {
 			email: props.email,
 			telephone: props.telephone,
 			type: props.type,
+			description: props.description,
 			comments: props.comments,
 			status: props.status,
 			userId: props.userId,
@@ -130,19 +135,42 @@ const BookingCard = (props) => {
 			email: props.email,
 			type: props.type,
 			telephone: props.telephone,
+			description:props.description,
 			comments: props.comments,
 		});
 	};
+
+const setDate = ()=>{
+	if(props.pliDate) {
+  	const dateConvert = new Date(props.pliDate);
+		const month = dateConvert.getMonth()+1;
+		const year = dateConvert.getFullYear(props.pliDate);
+		const date = dateConvert.getDate(props.pliDate);
+		const stringDate = date + "/" + month + "/" + year;
+		setPliDate(stringDate);
+	} else {
+		setPliDate("no date provided")
+	}
+}
 
 	/* When the user changes between filters, discard the changes. This will ensure that the 
 		contents of the edit fields will always match up with the correct card. 
 	*/
 	useEffect(() => {
+		
 		discardChanges();
 		/* eslint-disable */
 	}, [props._id]);
 	/* eslint-enable */
 
+	useEffect(() => {
+		
+		setDate();
+		/* eslint-disable */
+	}, []);
+	/* eslint-enable */
+	
+	
 	return (
 		<div
 			className={`booking-card ${props.isSelected ? "selected" : ""}`}
@@ -245,6 +273,17 @@ const BookingCard = (props) => {
 							onChange={(event) => formChangeHandler(event)}
 						/>
 						<textarea
+							placeholder="Stall description"
+							className="form-input auto-width"
+							value={editableFields.description}
+							style={{
+								minHeight: "3rem",
+								maxHeight: "3rem",
+							}}
+							name="description"
+							onChange={(event) => formChangeHandler(event)}
+						/>
+						<textarea
 							placeholder="Additional Comments"
 							className="form-input auto-width"
 							value={editableFields.comments}
@@ -281,9 +320,63 @@ const BookingCard = (props) => {
 								<p className="contact-info-container">
 									<FaRegCalendarAlt />
 									&nbsp;
-									{String(new Date(props.date * 1000)).slice(0, -34)}
+									{pliDate}
+									{/* {String(new Date(props.date * 1000)).slice(0, -34)} */}
 								</p>
+								{props.pii === "" ? (
+									<>
+									<p className="contact-info-container"></p>
+									<span className="warning">
+									 <FaRegFileExcel /> 
+									 No Insurance Document
+									 </span>
+									</>
+									):(
+									 <p className="contact-info-container">
+									   <FaRegFile />
+									   &nbsp;
+										 {/* https://drive.google.com/file/d/18Uwscf9LPje9Mg3nUiBwwcmKDa5Xpi_t/view?usp=drive_link
+										 https://drive.google.com/file/d/1iF85IJ9q7V1402JmKB3kF9pki6Y4pzZv/view?usp=sharing */}
+									   <a 
+									    href={`https://drive.google.com/file/d/${props.pii}/view?usp=drive_link`}
+									    target="_blank"
+									    rel="noreferrer"
+									   >
+										  Public Liability Insurance
+									   </a> 
+								  </p>
+								)}
+
+                {props.risk === "" ? (
+									<>
+									<p className="contact-info-container"></p>
+									<span className="warning">
+									 <FaRegFileExcel /> 
+									 No Risk Assesment
+									 </span>
+									</>
+									):(
+									 <p className="contact-info-container">
+									   <FaRegFile />
+									   &nbsp;
+									   <a 
+									    href={`https://drive.google.com/file/d/${props.risk}/view?usp=drive_link`}
+									    target="_blank"
+									    rel="noreferrer"
+									   >
+										  Risk Assessment
+									   </a> 
+								  </p>
+								)}
+
 							</div>
+							<p className="card-contact-info card-comments">
+									<FaStore />
+									&nbsp;
+									{props.description}
+								</p>
+
+
 							{props.comments && props.comments.toLowerCase() !== "no" ? (
 								<p className="card-contact-info card-comments">
 									<FaComments />
@@ -323,6 +416,7 @@ const BookingCard = (props) => {
 											telephone: props.telephone,
 											type: props.type,
 											comments: props.comments,
+											description: props.description,
 											status: props.status,
 											userId: props.userId,
 											pitchNo: props.pitchNo,

@@ -98,7 +98,7 @@ const NewStaff = (props) => {
 							onChange={(event) => changeHandler(event)}
 							required
 						/>
-						<h2 className="header-font">Password</h2>
+						<h2 className="header-font">Role</h2>
 						<select
 							className="form-input"
 							style={{ width: "106%" }}

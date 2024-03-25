@@ -65,10 +65,14 @@ const ViewBookings = (props) => {
 							email={stall.email}
 							telephone={stall.telephone}
 							type={stall.type}
+							description={stall.description}
 							comments={stall.comments}
 							status={stall.status}
 							pitchNo={stall.pitchNo}
 							date={stall.date}
+							pliDate={stall.pliDate}
+							pii={stall.pii}
+							risk={stall.risk}
 							isSelected={i === selected}
 							editable={props.editingBooking === stall._id}
 							view={props.view}
