@@ -71,6 +71,7 @@ const ViewBookings = (props) => {
 							pitchNo={stall.pitchNo}
 							date={stall.date}
 							pii={stall.pii}
+							risk={stall.risk}
 							isSelected={i === selected}
 							editable={props.editingBooking === stall._id}
 							view={props.view}

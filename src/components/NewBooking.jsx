@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const NewBooking = (props) => {
 	const [catering, setCatering] = useState(false)
   const [file, setFile] = useState ("");
+	const [riskAssessment, setRA] = useState ("");
 	const [bookingDetails, setBookingDetails] = useState({
 		name: "",
 		business: "",
@@ -19,7 +20,8 @@ const NewBooking = (props) => {
 		status: "unpaid",
 		pitchNo: -1,
 	  authority: "",
-		pii: ""
+		pii: "",
+		risk:""
 	});
 
 	const navigate = useNavigate()
@@ -48,25 +50,38 @@ const NewBooking = (props) => {
 	};
 
 	const handleFileChange = (event)=>{
-	   const file = {
+	   const fileTemp = {
       preview: URL.createObjectURL(event.target.files[0]),
       data: event.target.files[0],
     };
-    setFile(file);
+		if (event.target.name === "PII"){
+			setFile(fileTemp);
+		} else {
+			setRA(fileTemp)
+		}
 	};
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
-		let response = { data:{response:{data:{id:""}}}}
+		let pliResponse = { data:{response:{data:{id:""}}}}
+		let riskResponse = { data:{response:{data:{id:""}}}}
 		const nameDate = bookingDetails.business + "_" + dtstamp; 
-		console.log(file.data)
+		//upload PLI to google drive
 		if (file.data) {
 		 const namePLI = "PLI_" + nameDate
 		 let formData = new FormData();
 		 formData.append("file", file.data, namePLI);
-		 response = await props.client.fileUpload(formData);
+		 pliResponse = await props.client.fileUpload(formData);
 		}
+		//upload RA to google drive
+		if (riskAssessment.data) {
+			const nameRA = "RA_" + nameDate
+			let riskFormData = new FormData();
+			riskFormData.append("file", riskAssessment.data, nameRA);
+			riskResponse = await props.client.fileUpload(riskFormData);
+		 }
+		//submit data to DB
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
 			: (await props.client.getUserFromToken(props.selectedUser)).data._id;
@@ -82,7 +97,8 @@ const NewBooking = (props) => {
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
 				authority: bookingDetails.authority,
-				pii: response.data.response.data.id,
+				pii: pliResponse.data.response.data.id,
+				risk: riskResponse.data.response.data.id,
 				date: dtstamp,
 				userId: userId,
 			});  
@@ -206,6 +222,16 @@ const NewBooking = (props) => {
             <input 
 							className="form-input"
 							name="PII"
+							type="file" 
+							onChange={handleFileChange}>
+						</input>
+
+					  <h2 className="header-font">
+							Please upload your Risk Assesment for the stall
+						</h2>
+            <input 
+							className="form-input"
+							name="risk"
 							type="file" 
 							onChange={handleFileChange}>
 						</input>

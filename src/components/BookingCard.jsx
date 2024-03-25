@@ -323,6 +323,28 @@ const BookingCard = (props) => {
 								  </p>
 								)}
 
+                {props.risk === "" ? (
+									<>
+									<p className="contact-info-container"></p>
+									<span className="warning">
+									 <FaRegFileExcel /> 
+									 No Risk Assesment
+									 </span>
+									</>
+									):(
+									 <p className="contact-info-container">
+									   <FaRegFile />
+									   &nbsp;
+									   <a 
+									    href={`https://drive.google.com/file/d/${props.risk}/view?usp=drive_link`}
+									    target="_blank"
+									    rel="noreferrer"
+									   >
+										  Risk Assessment
+									   </a> 
+								  </p>
+								)}
+
 							</div>
 							<p className="card-contact-info card-comments">
 									<FaStore />
