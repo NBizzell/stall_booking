@@ -128,7 +128,6 @@ export class ApiClient {
 	}
 
 	fileUpload(fileData){
-    console.log(fileData);
     return this.apiCall("post", `${url}file`,fileData);
 	}
 }

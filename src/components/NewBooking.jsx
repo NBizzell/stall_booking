@@ -59,12 +59,12 @@ const NewBooking = (props) => {
 		event.preventDefault();
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let response = { data:{response:{data:{id:""}}}}
-		const namedate = bookingDetails.name + dtstamp 
+		const nameDate = bookingDetails.business + "_" + dtstamp; 
+		console.log(file.data)
 		if (file.data) {
+		 const namePLI = "PLI_" + nameDate
 		 let formData = new FormData();
-		 formData.append("file", file.data);
-		 formData.append("name", namedate);
-		 console.log(formData)
+		 formData.append("file", file.data, namePLI);
 		 response = await props.client.fileUpload(formData);
 		}
 		let userId = !props.selectedUser
