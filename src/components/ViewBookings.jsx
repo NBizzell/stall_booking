@@ -70,6 +70,7 @@ const ViewBookings = (props) => {
 							status={stall.status}
 							pitchNo={stall.pitchNo}
 							date={stall.date}
+							pliDate={stall.pliDate}
 							pii={stall.pii}
 							risk={stall.risk}
 							isSelected={i === selected}

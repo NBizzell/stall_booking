@@ -4,11 +4,14 @@ import Tac from "../components/StanningtonCarnivalTAC.pdf"
 import "toastr/build/toastr.min.css";
 import "./NewBooking.css";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const NewBooking = (props) => {
 	const [catering, setCatering] = useState(false)
   const [file, setFile] = useState ("");
 	const [riskAssessment, setRA] = useState ("");
+	const [startDate, setStartDate] = useState();
 	const [bookingDetails, setBookingDetails] = useState({
 		name: "",
 		business: "",
@@ -21,7 +24,7 @@ const NewBooking = (props) => {
 		pitchNo: -1,
 	  authority: "",
 		pii: "",
-		risk:""
+		risk:"",
 	});
 
 	const navigate = useNavigate()
@@ -63,6 +66,7 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
+		console.log(startDate);
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let pliResponse = { data:{response:{data:{id:""}}}}
 		let riskResponse = { data:{response:{data:{id:""}}}}
@@ -99,6 +103,7 @@ const NewBooking = (props) => {
 				authority: bookingDetails.authority,
 				pii: pliResponse.data.response.data.id,
 				risk: riskResponse.data.response.data.id,
+				pliDate: startDate,
 				date: dtstamp,
 				userId: userId,
 			});  
@@ -215,7 +220,17 @@ const NewBooking = (props) => {
   						</>
 								: ''
 						}
-						   
+					
+						<h2 className="header-font">
+							Please select the date of expiry for your Public Liability Insurance
+						</h2>
+					 	<DatePicker 
+							className="form-input"
+					  	selected={startDate} 
+							dateFormat="dd/MM/yyyy" 
+							onChange={(date) => setStartDate(date)} 
+						/>
+
 					  <h2 className="header-font">
 							Please upload proof of your Public Liability Insurance
 						</h2>

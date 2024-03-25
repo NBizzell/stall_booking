@@ -31,6 +31,7 @@ toastr.options = {
 const BookingCard = (props) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [isEditable, setIsEditable] = useState(false);
+	const [pliDate, setPliDate] = useState()
 	const [editableFields, setEditableFields] = useState({
 		business: props.business,
 		name: props.name,
@@ -139,15 +140,37 @@ const BookingCard = (props) => {
 		});
 	};
 
+const setDate = ()=>{
+	if(props.pliDate) {
+  	const dateConvert = new Date(props.pliDate);
+		const month = dateConvert.getMonth()+1;
+		const year = dateConvert.getFullYear(props.pliDate);
+		const date = dateConvert.getDate(props.pliDate);
+		const stringDate = date + "/" + month + "/" + year;
+		setPliDate(stringDate);
+	} else {
+		setPliDate("no date provided")
+	}
+}
+
 	/* When the user changes between filters, discard the changes. This will ensure that the 
 		contents of the edit fields will always match up with the correct card. 
 	*/
 	useEffect(() => {
+		
 		discardChanges();
 		/* eslint-disable */
 	}, [props._id]);
 	/* eslint-enable */
 
+	useEffect(() => {
+		
+		setDate();
+		/* eslint-disable */
+	}, []);
+	/* eslint-enable */
+	
+	
 	return (
 		<div
 			className={`booking-card ${props.isSelected ? "selected" : ""}`}
@@ -297,7 +320,8 @@ const BookingCard = (props) => {
 								<p className="contact-info-container">
 									<FaRegCalendarAlt />
 									&nbsp;
-									{String(new Date(props.date * 1000)).slice(0, -34)}
+									{pliDate}
+									{/* {String(new Date(props.date * 1000)).slice(0, -34)} */}
 								</p>
 								{props.pii === "" ? (
 									<>
