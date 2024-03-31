@@ -262,7 +262,7 @@ const NewBooking = (props) => {
 							onChange={(event) => changeHandler(event)}
 							placeholder="Please let us know anything else you think will be useful....."
 						/>
-						<h2 className="header-font">Important informaton before you book</h2>
+						<h2 className="header-font">Important information before you book</h2>
 						<ul>
 							<li>The event is outside on a field </li> 
 							<li>We are expecting 500 - 1000 attendees </li>
