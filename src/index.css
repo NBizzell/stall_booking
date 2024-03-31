@@ -192,3 +192,28 @@ code {
 .mt-2 {
 	margin-top: 2rem;
 }
+
+
+.flexcontainer {
+  display: flex;
+  flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.flex-item-left {
+  flex: 28%;
+}
+
+.flex-item-right {
+  flex: 70%;
+}
+
+
+@media (max-width: 800px) {
+	.flexcontainer {
+		flex-direction: column;
+	}
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+  }
+}
