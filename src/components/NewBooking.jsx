@@ -17,7 +17,7 @@ const NewBooking = (props) => {
 		business: "",
 		email: "",
 		telephone: "",
-		type: "Commercial",
+		type: "",
 		description: "",
 		comments: "",
 		status: "unpaid",
@@ -36,6 +36,7 @@ const NewBooking = (props) => {
 
 	const changeHandler = (event) => {
 		// Updates states on input box change
+		console.log(event)
 		let fieldValue = event.target.value;
 		let fieldName = event.target.name;
 		const newState = { ...bookingDetails };
@@ -44,12 +45,18 @@ const NewBooking = (props) => {
 	};
 
 	const typeHandler = (event)=>{
+		console.log(event.target.value)
 		if (event.target.value !== 'Catering'){
 			setCatering(false)
 		} else {
 			setCatering(true)
 		}
-		changeHandler(event)
+		// changeHandler(event)
+		let fieldValue = event.target.value;
+		let fieldName = event.target.name;
+		const newState = { ...bookingDetails };
+		newState["type"] = fieldValue;
+		setBookingDetails(newState);
 	};
 
 	const handleFileChange = (event)=>{
@@ -66,7 +73,7 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		console.log(startDate);
+		console.log(bookingDetails.type)
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let pliResponse = { data:{response:{data:{id:""}}}}
 		let riskResponse = { data:{response:{data:{id:""}}}}
