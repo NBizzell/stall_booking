@@ -65,9 +65,11 @@ const Login = (props) => {
 						</span>
 						<p>Login or register from here to access bookings.</p>
 						<div className="main">
-							<div class="col-md-6 col-sm-12">
+							<div >
 								<div className="login-form">
-									<form onSubmit={(event) => submitHandler(event)}>
+									<form 
+										onSubmit={(event) => submitHandler(event)}
+									>
 										<div className="form-group">
 											<input
 												className="form-control"
