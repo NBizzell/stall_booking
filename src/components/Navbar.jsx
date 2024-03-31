@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 import "../images/stannington-carnival-logo.jpg";
 import "./Navbar.css";
 
@@ -19,6 +20,16 @@ const Navbar = (props) => {
 		}
 	}
 
+	function responsiveMenu() {
+		console.log("responsive")
+		let x = document.getElementById("navbar");
+		if (x.className === "navbar") {
+			x.className = "navbar responsive";
+		} else {
+			x.className = "navbar";
+		}
+	}
+
 	// Handles changing userRole state (when user token changes)
 	useEffect(() => {
 		const callApi = async () => {
@@ -32,25 +43,25 @@ const Navbar = (props) => {
 	}, [props.client, props.token]);
 
 	return (
-		<div className="navbar fb row">
+		<div className="navbar" id="navbar">
 			<Link to="/">
 				<img
 					className="stannington-carnival-logo"
-					style={{ height: "100%" }}
+					style={{ height: "60px" }}
 					src={require("../images/stannington-carnival-logo.jpg")}
 					alt={"event it logo"}
 				/>
 			</Link>
 			<div className="nav-buttons">
-				<Link to="/">
+				{/* <Link to="/">
 					<button className="nav-btn">Home</button>
-				</Link>
+				</Link> */}
 
 				{["admin", "finance", "committee", "allocator", "super"].includes(
 					userRole
 				) ? (
 					<>
-						<Link to={userRole === "super" ? "/staff" : `/staff/${userRole}`}>
+						<Link className="no-td" to={userRole === "super" ? "/staff" : `/staff/${userRole}` }>
 							<button className="nav-btn">{`${capitalizeFirstLetter(
 								userRole
 							)} Page`}</button>
@@ -97,7 +108,11 @@ const Navbar = (props) => {
 				>
 					<button className="nav-btn">Login</button>
 				</Link>
+				
 			</div>
+			<button className="navicon" onClick={()=>responsiveMenu()}>
+					<FaBars />
+				</button>
 		</div>
 	);
 };

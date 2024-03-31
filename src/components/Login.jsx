@@ -57,7 +57,7 @@ const Login = (props) => {
 						className="stannington-carnival-sidebar"
 						style={{ width: "50%" }}
 						src={require("../images/stannington.jpg")}
-						alt={"event it logo"}
+						alt={"Stannington Carnival logo"}
 					/>
 					<div className="login-main-text mg-0">
 						<span>
@@ -65,9 +65,11 @@ const Login = (props) => {
 						</span>
 						<p>Login or register from here to access bookings.</p>
 						<div className="main">
-							<div class="col-md-6 col-sm-12">
+							<div >
 								<div className="login-form">
-									<form onSubmit={(event) => submitHandler(event)}>
+									<form 
+										onSubmit={(event) => submitHandler(event)}
+									>
 										<div className="form-group">
 											<input
 												className="form-control"

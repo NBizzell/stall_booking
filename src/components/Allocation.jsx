@@ -57,9 +57,9 @@ const Allocation = (props) => {
 	}, [props.client, updated]);
 
 	return (
-		<div className="fb row">
+		<div className="fb row flexcontainer">
 			<div
-				className="fb col"
+				className="fb col flex-item-left"
 				style={{
 					borderRight: "1px solid #aaa",
 					minWidth: "415px",
@@ -72,11 +72,11 @@ const Allocation = (props) => {
 					setSelectedStatus={setSelectedStatus}
 				/>
 			</div>
-			<div className="fb col" style={{ minHeight: "90vh", minWidth: "75%" }}>
+			<div className="fb col flex-item-right">
 				<div className="fb row centered gap-2 fixed-element">
-					<div style={{ width: "300px" }}>
+					<div style={{ width: "80%" }}>
 						<Select
-							style={{ width: "10rem" }}
+							
 							placeholder="Choose a stall number..."
 							options={dropdownContents}
 							onChange={(event) => setDropdownSelection(event.label)}
@@ -102,7 +102,7 @@ const Allocation = (props) => {
 				) : (
 					<div
 						className="header-font finance-header centered"
-						style={{ width: "100%", height: "100%" }}
+						
 					>
 						User has never logged in.
 					</div>

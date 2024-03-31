@@ -108,74 +108,11 @@ const App = () => {
 									</article>
 								</div>
 							</div>
-								{/* <hr className="newhr" />
-							<h2
-								className="header-font mg-2"
-								style={{ fontSize: "32px", marginBottom: 0 }}
-							>
-							 Get Involved!
-							</h2>
-							<div className="fb row showcase gap-4">
-								<ShowcaseItem
-									image={require("./images/classic-cars.jpg")}
-									title="Classic Cars"
-									body="We have a large selection of Classic Cars on display every year - if you own a classic car and would like to display it, Stannington Carnival would be happy to have you."
-								/>
-								<ShowcaseItem
-									image={
-										"https://scontent.flba3-2.fna.fbcdn.net/v/t39.30808-6/292131497_5308077275915342_8743583750948687089_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=N_MlZUOYvXoAX9PRXYE&_nc_oc=AQltU-AH7ftkwj1QnbeQ31OXS0qBvXnf3kV8GJ9MudswfQtI8mQp789_Fh8I-6G1JPc&_nc_ht=scontent.flba3-2.fna&oh=00_AfDQU4V5po1ZvNtTEJQZSZa3SGPXAWqHpmheySWCD2ZYMQ&oe=63966D13"
-									}
-									title="Volunteering"
-									body="If you have been Celebrating Stannington with us, or if you simply think it’s time we had a carnival again, then we need you to come and help us make it happen!"
-								/>
-								<ShowcaseItem
-									image={
-										"https://scontent.flba3-2.fna.fbcdn.net/v/t1.6435-9/66700850_2375277319195367_9087280917134704640_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=NZbelZTHeAMAX81rB2v&_nc_ht=scontent.flba3-2.fna&oh=00_AfDa4KuYqEW0mSL-tKovEi2ijHAvA4di7Cn4zjeHT_aaZA&oe=63B969D9"
-									}
-									title="Stall Booking"
-									body="Potential Stall holders wishing to exhibit at Stannington Carnival 2023 should do so through our new stall booking system."
-									link="/bookings/new"
-								/>
-								<ShowcaseItem
-									image={
-										"https://scontent.flba3-2.fna.fbcdn.net/v/t39.30808-6/293149435_5308078539248549_5302982147772306707_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=Mx6-dQbhrMkAX8NLB_u&_nc_ht=scontent.flba3-2.fna&oh=00_AfDTCoIWD7Tn617YbC2uk548hMqK10aGkAS-CiYKAjpSNQ&oe=63978EBC"
-									}
-									title="Placeholder"
-									body="We have a large selection of Classic Cars on display every year - if you own a classic car and would like to display it, Stannington Carnival would be happy to have you."
-								/>
-							</div> */}
-							<hr className="newhr" />
-							<h2 className="header-font mg-2" style={{ fontSize: "32px" }}>
-								Where are we?
-							</h2>
-							<div className="centered" style={{ marginBottom: "3rem" }}>
-								<iframe
-									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2379.2398549699756!2d-1.544726216862639!3d53.39264916316159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48797f4522bd298f%3A0xdf7abe3e4eccbb45!2sStannington%20Park!5e0!3m2!1sen!2suk!4v1670427738185!5m2!1sen!2suk"
-									width="97%"
-									height="550"
-									style={{ border: 0, borderRadius: "12px" }}
-									loading="lazy"
-									title="location-map"
-								></iframe>
-							</div>
+			
 							<footer className="home-footer">
 								<div className="fb row gap-4">
+						
 									<section>
-										<h3>Find us on Social Media:</h3>
-										<div className="fb row gap-1">
-											<a href="https://en-gb.facebook.com/stanningtoncarnival/">
-												<IoLogoFacebook className="footer-social no-td" />
-											</a>
-											<a href="https://www.instagram.com/stanningtoncarnival1/">
-												<IoLogoInstagram className="footer-social" />
-											</a>
-											<a href="https://twitter.com/stanncarnival">
-												<IoLogoTwitter className="footer-social" />
-											</a>
-										</div>
-									</section>
-									<section>
-										<h3>Contact Information:</h3>
 										<div className="fb col" style={{ gap: "0.1rem" }}>
 											<p className="mg-0">
 												<span style={{ fontWeight: "bold" }}>

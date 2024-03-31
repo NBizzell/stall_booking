@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 
+
 const Committee = (props) => {
 	const [proportions, setProportions] = useState({});
 	const [totalAssigned, setTotalAssigned] = useState(0);
@@ -23,12 +24,13 @@ const Committee = (props) => {
 	/*eslint-enable*/
 
 	return (
-		<div className="centered" style={{ width: "100vw", height: "90vh" }}>
-			<div className="fb col centered" style={{ width: "600px" }}>
+		<div className="centered row">
+			<div className="fb col centered" style={{height: "500px"}}>
 				<p className="header-font" style={{ fontSize: "25px" }}>
 					Stall Type Breakdown:
 				</p>
 				<PieChart
+					radius={50}
 					label={({ dataEntry }) => `
                 ${dataEntry.title}: ${dataEntry.value} (${Math.round(
 						dataEntry.percentage
@@ -37,7 +39,7 @@ const Committee = (props) => {
 					lineWidth={75}
 					labelStyle={{
 						fill: "#fff",
-						fontSize: "4px",
+						fontSize: "3px",
 						pointerEvents: "none",
 					}}
 					data={Object.entries(proportions).map((item, i) => {
@@ -60,7 +62,7 @@ const Committee = (props) => {
 						{` ${totalBookingsCount}`}
 					</p>
 					<p>
-						Total Bookings with assigned Pitch Numbers:
+						Bookings assigned Pitch Numbers:
 						{` ${totalAssigned}`}
 					</p>
 				</div>
