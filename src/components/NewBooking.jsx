@@ -17,7 +17,7 @@ const NewBooking = (props) => {
 		business: "",
 		email: "",
 		telephone: "",
-		type: "",
+		type: "Commercial",
 		description: "",
 		comments: "",
 		status: "unpaid",
@@ -36,7 +36,6 @@ const NewBooking = (props) => {
 
 	const changeHandler = (event) => {
 		// Updates states on input box change
-		console.log(event)
 		let fieldValue = event.target.value;
 		let fieldName = event.target.name;
 		const newState = { ...bookingDetails };
@@ -45,7 +44,6 @@ const NewBooking = (props) => {
 	};
 
 	const typeHandler = (event)=>{
-		console.log(event.target.value)
 		if (event.target.value !== 'Catering'){
 			setCatering(false)
 		} else {
@@ -73,13 +71,6 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		//deal with empty type if not changed from default
-		if (bookingDetails.type ===""){
-		const typeState = { ...bookingDetails };
-		typeState["type"] = "Commercial";
-		setBookingDetails(typeState);
-		}
-		console.log(bookingDetails.type)
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let pliResponse = { data:{response:{data:{id:""}}}}
 		let riskResponse = { data:{response:{data:{id:""}}}}
@@ -120,7 +111,7 @@ const NewBooking = (props) => {
 				date: dtstamp,
 				userId: userId,
 			});  
-			props.refresh !== undefined && props.refresh();
+			// props.refresh !== undefined && props.refresh();
 			toastr["success"](
 				"Your booking has been submitted. We'll be in contact with you soon.",
 				"Success!"
