@@ -1,9 +1,10 @@
 .navbar {
-	display: flex;
-	height: 6rem;
+	overflow: hidden;
+	display: flex; 
+	/* height: 6rem; */
 	width: 100%;
 	background-color: #0a3051;
-	/* position: relative; */
+	position: relative; 
 }
 
 .nav-buttons {
@@ -24,6 +25,37 @@
 	color: white;
 }
 
+.navicon {
+	border: none;
+	width: 100px;
+	height: 100%;
+	background-color: #0a3051;
+	padding: 10px 10px 10px 10px;
+	font-size: 20px;
+	margin-left: auto;
+	cursor: pointer;
+	color: white;
+	display: none;
+}
+
 .nav-btn:hover {
 	color: lightblue;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar .nav-buttons {display: none;}
+  .navbar .navicon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .navbar.responsive {position: relative;}
+  .navbar.responsive .nav-buttons {
+    float: none;
+    display: flex;
+		flex-direction: column;
+    text-align: left;
+  }
 }

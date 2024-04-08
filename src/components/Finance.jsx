@@ -16,12 +16,11 @@ const Finance = (props) => {
 	};
 
 	return (
-		<div className="fb row">
+		<div className="fb flexcontainer">
 			<div
-				className="fb col"
+				className="fb col flex-item-left"
 				style={{
 					borderRight: "1px solid #aaa",
-					minWidth: "415px",
 				}}
 			>
 				<UserList
@@ -31,7 +30,7 @@ const Finance = (props) => {
 					setSelectedStatus={setSelectedStatus}
 				/>
 			</div>
-			<div className="fb col" style={{ minHeight: "90vh", minWidth: "75%" }}>
+			<div className="fb col flex-item-right">
 				<h2 className="header-font finance-header">
 					Selected user's bookings:
 				</h2>

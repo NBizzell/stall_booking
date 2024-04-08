@@ -1,7 +1,7 @@
 import axios from "axios";
-// const url = "http://localhost:3001/";
-const url = "https://stall-booking-backend.onrender.com/";
-console.log("test");
+//const url = "http://localhost:3001/";
+const url = "https://stall-booking-api.azurewebsites.net/";
+
 
 export class ApiClient {
 	constructor(tokenProvider, logoutHandler) {
@@ -125,5 +125,9 @@ export class ApiClient {
 
 	deleteBooking(id) {
 		return this.apiCall("delete", `${url}bookings/${id}`);
+	}
+
+	fileUpload(fileData){
+    return this.apiCall("post", `${url}file`,fileData);
 	}
 }
