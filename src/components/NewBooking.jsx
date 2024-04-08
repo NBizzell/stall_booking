@@ -31,6 +31,12 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
+		//deal with empty type if not changed from default
+		if (bookingDetails.type ===""){
+		const typeState = { ...bookingDetails };
+		typeState[type] = "Commercial";
+		setBookingDetails(typeState);
+		}
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
 			: (await props.client.getUserFromToken(props.selectedUser)).data._id;
