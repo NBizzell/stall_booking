@@ -73,6 +73,12 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
+		//deal with empty type if not changed from default
+		if (bookingDetails.type ===""){
+		const typeState = { ...bookingDetails };
+		typeState[type] = "Commercial";
+		setBookingDetails(typeState);
+		}
 		console.log(bookingDetails.type)
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let pliResponse = { data:{response:{data:{id:""}}}}
