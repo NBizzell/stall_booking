@@ -76,7 +76,7 @@ const NewBooking = (props) => {
 		//deal with empty type if not changed from default
 		if (bookingDetails.type ===""){
 		const typeState = { ...bookingDetails };
-		typeState[type] = "Commercial";
+		typeState["type"] = "Commercial";
 		setBookingDetails(typeState);
 		}
 		console.log(bookingDetails.type)
