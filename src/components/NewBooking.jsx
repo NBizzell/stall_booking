@@ -121,15 +121,15 @@ const NewBooking = (props) => {
 				"Your booking has been submitted. We'll be in contact with you soon.",
 				"Success!"
 			);
-			setLoading(false)
 			navigate('/bookings/view')
 		} catch (error) {
 			toastr["error"](
 				"Something has gone wrong while submitting your booking, please contact us directly.",
 				"Error!"
 			);
-			setLoading(false)
 			throw error;
+		}finally {
+			setLoading(false)
 		}
 	};
 

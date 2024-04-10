@@ -280,7 +280,7 @@ const App = () => {
 						}
 					/>
 				</Route>
-				<Route path="/register" element={<Register client={client} />} />
+				<Route path="/register" element={<Register loggedIn={(token) => loggedIn(token)} client={client} />} />
 			</Routes>
 		</>
 	);
