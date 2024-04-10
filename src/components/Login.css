@@ -15,6 +15,11 @@ body {
 	height: 150px;
 	background: #fff;
 }
+
+a {
+  color: white;
+}
+
 a:visited{
   color: white;
 }
