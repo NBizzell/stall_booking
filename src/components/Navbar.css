@@ -48,6 +48,11 @@
     float: right;
     display: block;
   }
+	.navbar {
+		position: sticky; 
+		top:0;
+	}
+	
 }
 
 @media screen and (max-width: 800px) {
@@ -57,5 +62,11 @@
     display: flex;
 		flex-direction: column;
     text-align: left;
+		position: sticky; 
+		top:0;
   }
+	.navbar.responsive {
+		position: sticky; 
+		top:0;
+	}
 }
