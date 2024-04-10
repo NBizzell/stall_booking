@@ -16,11 +16,11 @@ body {
 	background: #fff;
 }
 
-a {
+.reglink {
   color: white;
 }
 
-a:visited{
+.reglink:visited{
   color: white;
 }
 
