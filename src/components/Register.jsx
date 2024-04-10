@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import "../App.css";
 import "./Login.css";
 
 const Register = (props) => {
+	const [loading, setLoading] = useState(false);
 	const [userDetails, setUserDetails] = useState({
 		username: "",
 		email: "",
@@ -18,6 +20,7 @@ const Register = (props) => {
 	const navigateTo = useNavigate();
 	const submitHandler = async (event) => {
 		event.preventDefault();
+		setLoading(true)
 		let requestOutput = (
 			await props.client.verifyRegistration({
 				username: userDetails.username,
@@ -29,15 +32,16 @@ const Register = (props) => {
 				"An account with that username already exists",
 				"Account creation failed"
 			);
+			setLoading(false)
 			return;
 		}
 		toastr[requestOutput.status](requestOutput.message, requestOutput.title);
 		if (requestOutput.status !== "success") {
 			console.log("Error verifying details");
+			setLoading(false)
 			return;
 		}
-		console.log("Good Registration");
-
+	
 		try {
 			await props.client.addUser(
 				userDetails.username,
@@ -45,13 +49,25 @@ const Register = (props) => {
 				userDetails.password,
 				"holder"
 			);
-			navigateTo("/");
+			
+			const res = await props.client.login(
+				userDetails.username,
+				userDetails.password
+			);
+			props.loggedIn(res.data.token);
+			toastr.options.closeButton = true;
+			toastr["success"]("Logged in successfully.", "Success!");
+
+
+			navigateTo("/bookings/new");
 		} catch (e) {
 			toastr["error"](
 				"An error occurred while creating your account. If the error continues please contact us directly.",
 				"Error!"
 			);
 			throw e;
+		} finally {
+			setLoading(false)
 		}
 	};
 
@@ -95,6 +111,7 @@ const Register = (props) => {
 											value={userDetails.username}
 											placeholder="Username..."
 											onChange={(event) => changeHandler(event)}
+											required
 										></input>
 									</div>
 									<div className="form-group">
@@ -105,11 +122,20 @@ const Register = (props) => {
 											value={userDetails.password}
 											placeholder="Password..."
 											onChange={(event) => changeHandler(event)}
+											required
 										></input>
 									</div>
-									<button className="btn btn-secondary" type="submit">
-										Register
-									</button>
+									{loading ?
+										<ScaleLoader
+								 			color="#ffffff"
+								 			height={35}
+								 			width={10}
+							  		/>
+									:
+										<button className="btn btn-secondary" type="submit">
+											Register
+										</button>
+									} 
 								</form>
 							</div>
 							</div>

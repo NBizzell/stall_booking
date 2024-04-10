@@ -15,6 +15,9 @@ body {
 	height: 150px;
 	background: #fff;
 }
+a:visited{
+  color: white;
+}
 
 .sidenav {
 	height: 100%;
