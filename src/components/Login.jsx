@@ -68,7 +68,7 @@ const Login = (props) => {
 						<span>
 							<h2 style={{ marginTop: "0" }}>CELEBRATING STANNINGTON</h2>
 						</span>
-						<p>Login or register from here to access bookings.</p>
+						<p>Login or <a className="nav-link" href="#/register" stlye={{color:"white"}}>register</a> from here to access bookings.</p>
 						<div className="main">
 							<div >
 								<div className="login-form">

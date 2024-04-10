@@ -79,7 +79,7 @@ const Navbar = (props) => {
 						className="nav-btn"
 						style={props.token ? { display: "block" } : { display: "none" }}
 					>
-						View Bookings
+						Your Bookings
 					</button>
 				</Link>
 				<Link to={!props.token ? "/login" : "/bookings/new"}>
