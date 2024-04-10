@@ -72,23 +72,25 @@ const NewBooking = (props) => {
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
-		let pliResponse = { data:{response:{data:{id:""}}}}
-		let riskResponse = { data:{response:{data:{id:""}}}}
+		let pliResponse = "";
+		let riskResponse = "";
 		const nameDate = bookingDetails.business + "_" + dtstamp; 
 		//upload PLI to google drive
 		if (file.data) {
 		 const namePLI = "PLI_" + nameDate
 		 let formData = new FormData();
 		 formData.append("file", file.data, namePLI);
-		 pliResponse = await props.client.fileUpload(formData);
+		 const pliUploadResponse = await props.client.fileUpload(formData);
+		 pliResponse = pliUploadResponse.data.id;
 		}
 		//upload RA to google drive
 		if (riskAssessment.data) {
 			const nameRA = "RA_" + nameDate
 			let riskFormData = new FormData();
 			riskFormData.append("file", riskAssessment.data, nameRA);
-			riskResponse = await props.client.fileUpload(riskFormData);
-		 }
+			const riskUploadResponse = await props.client.fileUpload(riskFormData);
+			riskResponse = riskUploadResponse.data.id
+		}
 		//submit data to DB
 		let userId = !props.selectedUser
 			? (await props.client.getUserFromToken(props.token)).data._id
@@ -105,8 +107,8 @@ const NewBooking = (props) => {
 				status: bookingDetails.status,
 				pitchNo: bookingDetails.pitchNo,
 				authority: bookingDetails.authority,
-				pii: pliResponse.data.response.data.id,
-				risk: riskResponse.data.response.data.id,
+				pii: pliResponse,
+				risk: riskResponse,
 				pliDate: startDate,
 				date: dtstamp,
 				userId: userId,

@@ -1,6 +1,6 @@
 import axios from "axios";
-//const url = "http://localhost:3001/";
-const url = "https://stall-booking-api.azurewebsites.net/";
+const url = "http://localhost:3001/";
+//const url = "https://stall-booking-api.azurewebsites.net/";
 
 
 export class ApiClient {
