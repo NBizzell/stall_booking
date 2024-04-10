@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import "../App.css";
 import "./Login.css";
 
 const Login = (props) => {
+	const [loading, setLoading] = useState(false);
 	const [userDetails, setUserDetails] = useState({
 		username: "",
 		email: "",
@@ -30,6 +32,7 @@ const Login = (props) => {
 	const submitHandler = async (event) => {
 		// Choose what to do on submit
 		event.preventDefault(); // Prevent page refreshing
+		setLoading(true)
 		try {
 			const res = await props.client.login(
 				userDetails.username,
@@ -38,11 +41,13 @@ const Login = (props) => {
 			props.loggedIn(res.data.token);
 			toastr.options.closeButton = true;
 			toastr["success"]("Logged in successfully.", "Success!");
-			navigateTo("/");
+			navigateTo("/bookings/view");
 		} catch (error) {
 			toastr.options.closeButton = true;
 			toastr["error"]("Those details did not match any account.", "Error!");
 			throw error;
+		} finally {
+			setLoading(false)
 		}
 	};
 
@@ -92,9 +97,17 @@ const Login = (props) => {
 											></input>
 										</div>
 										<div className="btn-container">
-											<button type="submit" className="btn">
-												Login
-											</button>
+											{loading ?
+												<ScaleLoader
+								 					color="#ffffff"
+								 					height={35}
+								 					width={10}
+							  				/>
+											:
+												<button type="submit" className="btn">
+													Login
+												</button>
+											}				
 										</div>
 									</form>
 								</div>
