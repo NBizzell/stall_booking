@@ -6,9 +6,11 @@ import "./NewBooking.css";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const NewBooking = (props) => {
-	const [catering, setCatering] = useState(false)
+	const [catering, setCatering] = useState(false);
+	const [loading, setLoading] = useState(false);
   const [file, setFile] = useState ("");
 	const [riskAssessment, setRA] = useState ("");
 	const [startDate, setStartDate] = useState();
@@ -71,6 +73,7 @@ const NewBooking = (props) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
+    setLoading(true)
 		const dtstamp = Math.floor(Date.now() / 1000); //epoch timestamp
 		let pliResponse = "";
 		let riskResponse = "";
@@ -118,12 +121,14 @@ const NewBooking = (props) => {
 				"Your booking has been submitted. We'll be in contact with you soon.",
 				"Success!"
 			);
+			setLoading(false)
 			navigate('/bookings/view')
 		} catch (error) {
 			toastr["error"](
 				"Something has gone wrong while submitting your booking, please contact us directly.",
 				"Error!"
 			);
+			setLoading(false)
 			throw error;
 		}
 	};
@@ -293,13 +298,22 @@ const NewBooking = (props) => {
 						I agree to the terms and conditions
 						</label>
 						<div className="centered">
-							<button
-								className="btn"
-								type="submit"
-								style={{ marginTop: "2rem" }}
-							>
-								Submit
-							</button>
+							
+              {loading ? 
+                <ScaleLoader
+								 color="#0a3153"
+								 height={45}
+								 width={10}
+							  />
+							:
+								<button
+									className="btn"
+									type="submit"
+									style={{ marginTop: "2rem" }}
+								>
+									Submit
+								</button>
+							}
 						</div>
 					</div>
 				</form>
