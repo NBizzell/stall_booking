@@ -73,6 +73,7 @@ const ViewBookings = (props) => {
 							pliDate={stall.pliDate}
 							pii={stall.pii}
 							risk={stall.risk}
+							authority={stall.authority}
 							isSelected={i === selected}
 							editable={props.editingBooking === stall._id}
 							view={props.view}

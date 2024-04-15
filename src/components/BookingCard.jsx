@@ -14,6 +14,7 @@ import {
 	FaStore,
 	FaRegFile,
 	FaRegFileExcel,
+	FaUtensils,
 } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { ImBin } from "react-icons/im";
@@ -317,6 +318,16 @@ const setDate = ()=>{
 									&nbsp;
 									{props.telephone}
 								</p>
+                {props.authority == "" ?
+								 <></>
+							  :
+								 <p className="contact-info-container">
+									<FaUtensils />
+									&nbsp;
+									{props.authority}
+								 </p>
+							  }
+
 								<p className="contact-info-container">
 									<FaRegCalendarAlt />
 									&nbsp;
