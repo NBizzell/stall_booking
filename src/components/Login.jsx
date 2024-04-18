@@ -96,6 +96,8 @@ const Login = (props) => {
 												onChange={(event) => changeHandler(event)}
 											></input>
 										</div>
+
+										<p><a className="reglink" href="#/forgot" stlye={{color:"white"}}>Forgotten your password?</a></p>
 										<div className="btn-container">
 											{loading ?
 												<ScaleLoader
