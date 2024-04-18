@@ -291,6 +291,7 @@ const App = () => {
 					path="/forgot" 
 					element={<ForgotPassword />} 
 				/>
+				<Route path="/register" element={<Register loggedIn={(token) => loggedIn(token)} client={client} />} />
 			</Routes>
 		</>
 	);
