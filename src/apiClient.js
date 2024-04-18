@@ -131,11 +131,11 @@ export class ApiClient {
     return this.apiCall("post", `${url}file`,fileData);
 	}
 
-	forgotPassword(data){
-		return this.apiCall("post", `${url}users/forgetPassword`)
+	forgotPassword(email){
+		return this.apiCall("post", `${url}forgetPassword`, email)
 	}
 
 	resetPassword(token, data){
-		return this.apiCall("post",`${url}users/reset-password${token}`,data)
+		return this.apiCall("post",`${url}reset-password${token}`,data)
 	}
 }
