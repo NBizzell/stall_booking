@@ -117,6 +117,17 @@ const Register = (props) => {
 									<div className="form-group">
 										<input
 											className="form-control"
+											name="email"
+											type="email"
+											value={userDetails.email}
+											placeholder="email"
+											onChange={(event) => changeHandler(event)}
+											required
+										></input>
+									</div>
+									<div className="form-group">
+										<input
+											className="form-control"
 											name="password"
 											type="password"
 											value={userDetails.password}
