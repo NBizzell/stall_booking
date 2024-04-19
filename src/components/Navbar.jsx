@@ -57,7 +57,7 @@ const Navbar = (props) => {
 					<button className="nav-btn">Home</button>
 				</Link> */}
 
-				{["admin", "finance", "committee", "allocator", "super"].includes(
+				{["admin", "finance", "allocator", "super"].includes(
 					userRole
 				) ? (
 					<>
@@ -73,7 +73,18 @@ const Navbar = (props) => {
 				) : (
 					<></>
 				)}
-
+				
+        { userRole === "committee"
+				? (
+					<>
+						<Link to="/staff/committee">
+							<button className="nav-btn">View Statistics</button>
+						</Link>
+					</>
+				) : (
+					<></>
+				)}
+				
 				<Link className="no-td" to={!props.token ? "/login" : "/bookings/view"}>
 					<button
 						className="nav-btn"
