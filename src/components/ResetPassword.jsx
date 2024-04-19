@@ -36,9 +36,7 @@ const ResetPassword = (props) => {
 				return
 			}
 			// reset password using request in api client
-			console.log(token,userDetails.password)
-		  const requestOutput =  await props.client.resetPassword(token, {password: userDetails.password})
-			console.log(requestOutput);
+		  const requestOutput =  await props.client.resetPassword(token, {password: userDetails.password});
 			toastr[requestOutput.data.status](requestOutput.data.message, requestOutput.data.title);
 			if (requestOutput.data.status === "success") {
 				navigateTo("/login");
