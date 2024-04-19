@@ -66,7 +66,7 @@ const Committee = (props) => {
 						{` ${totalBookingsCount}`}
 					</p>
 					<p>
-						Bookings paid:
+						Paid Bookings:
 						{` ${paid}`}
 					</p>
 					<p>
