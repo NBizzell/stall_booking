@@ -6,6 +6,7 @@ const Committee = (props) => {
 	const [proportions, setProportions] = useState({});
 	const [totalAssigned, setTotalAssigned] = useState(0);
 	const [totalBookingsCount, setTotalBookingsCount] = useState(0);
+	const [paid, setPaid] = useState(0);
 
 
 	let colours = { GreenFair: "#5c5", Catering: "#c5c", Commercial: "#55f", Charity: "#f55" };
@@ -17,8 +18,11 @@ const Committee = (props) => {
 				(await props.client.getTotalAssigned()).data["allocated stalls"]
 			);
 			setTotalBookingsCount((await props.client.getAllBookings()).data.length);
+			setPaid((await props.client.getByStatus("paid")).data.length);
+			
 		};
 		callApi();
+		console.log(paid)
 		/*eslint-disable*/
 	}, [props.client, props.token]);
 	/*eslint-enable*/
@@ -60,6 +64,10 @@ const Committee = (props) => {
 					<p>
 						Total Bookings:
 						{` ${totalBookingsCount}`}
+					</p>
+					<p>
+						Bookings paid:
+						{` ${paid}`}
 					</p>
 					<p>
 						Bookings assigned Pitch Numbers:
