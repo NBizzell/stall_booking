@@ -5,12 +5,12 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import "../App.css";
 import "./Login.css";
 
-const Register = (props) => {
+
+// adapt this to get the email and send the forgot password request.
+const ForgotPassword = (props) => {
 	const [loading, setLoading] = useState(false);
 	const [userDetails, setUserDetails] = useState({
-		username: "",
 		email: "",
-		password: "",
 	});
 
 	toastr.options = {
@@ -21,51 +21,27 @@ const Register = (props) => {
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		setLoading(true)
-		let requestOutput = (
-			await props.client.verifyRegistration({
-				username: userDetails.username,
-				password: userDetails.password,
-			})
-		).data;
-		if (!(await props.client.usernameIsAvailable(userDetails.username)).data) {
-			toastr["error"](
-				"An account with that username already exists",
-				"Account creation failed"
+		try{
+			await props.client.forgotPassword({email: userDetails.email})
+		
+			toastr["success"](
+				"If an account with that email exists a link has been sent to reset your password.",
+				"Success!"
 			);
-			setLoading(false)
-			return;
-		}
-		toastr[requestOutput.status](requestOutput.message, requestOutput.title);
-		if (requestOutput.status !== "success") {
-			console.log("Error verifying details");
-			setLoading(false)
-			return;
-		}
-	
-		try {
-			await props.client.addUser(
-				userDetails.username,
-				userDetails.email,
-				userDetails.password,
-				"holder"
-			);
-			
-			const res = await props.client.login(
-				userDetails.username,
-				userDetails.password
-			);
-			props.loggedIn(res.data.token);
-			toastr.options.closeButton = true;
-			toastr["success"]("Logged in successfully.", "Success!");
-
-
-			navigateTo("/bookings/new");
+			navigateTo("/login");
 		} catch (e) {
+			if (e.response.status === 404){
+				toastr["error"](
+					"There is no account registered with that email address, please check and try again",
+					"Error!"
+				);
+			} else {
+
 			toastr["error"](
-				"An error occurred while creating your account. If the error continues please contact us directly.",
+				"An error occurred attempting to reset your password. If the error continues please contact us directly.",
 				"Error!"
-			);
-			throw e;
+			)
+		  }
 		} finally {
 			setLoading(false)
 		}
@@ -96,7 +72,7 @@ const Register = (props) => {
 						<span>
 							<h2 style={{ marginTop: 0 }}>CELEBRATING STANNINGTON</h2>
 						</span>
-						<h2>Registration</h2>
+						<h2>Password Reset</h2>
 						<div className="main">
 							<div>
 							<div className="login-form">
@@ -106,36 +82,15 @@ const Register = (props) => {
 									<div className="form-group">
 										<input
 											className="form-control"
-											name="username"
-											type="text"
-											value={userDetails.username}
-											placeholder="Username..."
-											onChange={(event) => changeHandler(event)}
-											required
-										></input>
-									</div>
-									<div className="form-group">
-										<input
-											className="form-control"
 											name="email"
-											type="email"
-											value={userDetails.email}
-											placeholder="email"
-											onChange={(event) => changeHandler(event)}
-											required
-										></input>
-									</div>
-									<div className="form-group">
-										<input
-											className="form-control"
-											name="password"
-											type="password"
+											type="text"
 											value={userDetails.password}
-											placeholder="Password..."
+											placeholder="Enter your email address....."
 											onChange={(event) => changeHandler(event)}
 											required
 										></input>
 									</div>
+
 									{loading ?
 										<ScaleLoader
 								 			color="#ffffff"
@@ -144,7 +99,7 @@ const Register = (props) => {
 							  		/>
 									:
 										<button className="btn btn-secondary" type="submit">
-											Register
+											Request Password Reset
 										</button>
 									} 
 								</form>
@@ -163,4 +118,4 @@ const Register = (props) => {
 	);
 };
 
-export default Register;
+export default ForgotPassword;

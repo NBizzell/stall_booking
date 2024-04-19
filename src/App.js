@@ -17,7 +17,8 @@ import Register from "./components/Register";
 import StaffPortal from "./components/StaffPortal";
 import ViewBookings from "./components/ViewBookings";
 import "./images/classic-cars.jpg";
-
+import ResetPassword from "./components/ResetPassword.jsx";
+import ForgotPassword from "./components/ForgotPassword.jsx";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -280,6 +281,16 @@ const App = () => {
 						}
 					/>
 				</Route>
+				
+				<Route 
+					path="/reset/*" 
+					element={<ResetPassword client={client}/>} 
+				/>
+			
+				<Route 
+					path="/forgot" 
+					element={<ForgotPassword client={client}/>} 
+				/>
 				<Route path="/register" element={<Register loggedIn={(token) => loggedIn(token)} client={client} />} />
 			</Routes>
 		</>

@@ -1,6 +1,6 @@
 import axios from "axios";
-//const url = "http://localhost:3001/";
-const url = "https://stall-booking-api.azurewebsites.net/";
+const url = "http://localhost:3001/";
+//const url = "https://stall-booking-api.azurewebsites.net/";
 
 
 export class ApiClient {
@@ -129,5 +129,13 @@ export class ApiClient {
 
 	fileUpload(fileData){
     return this.apiCall("post", `${url}file`,fileData);
+	}
+
+	forgotPassword(email){
+		return this.apiCall("post", `${url}forgetPassword`, email)
+	}
+
+	resetPassword(token, data){
+		return this.apiCall("post",`${url}reset-password/${token}`, data)
 	}
 }
