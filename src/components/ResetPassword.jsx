@@ -9,7 +9,9 @@ import "./Login.css";
 const ResetPassword = (props) => {
 	const [loading, setLoading] = useState(false);
 	const [userDetails, setUserDetails] = useState({
-		email: "",
+		username: "",
+		password: "",
+		confirm: ""
 	});
 
 	toastr.options = {
@@ -21,24 +23,29 @@ const ResetPassword = (props) => {
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		setLoading(true)
-		try{
-			// verify password details
-			let requestOutput = (
-				await props.client.verifyRegistration({
-					username: userDetails.username,
-					password: userDetails.password,
-				})
-			).data;
-			// reset password using request in api client
+		const token = window.location.href.split("/").pop();
 		
-			toastr["success"](
-				"your password has been reset please login",
-				"Success!"
-			);
-			navigateTo("/login");
+		try{
+      // check password and confirm match
+      if (userDetails.password != userDetails.confirm){
+				toastr["error"]("Entered passwords must match", "Password Error")
+				setUserDetails({
+					password: "",
+					confirm: ""
+			  })
+				return
+			}
+			// reset password using request in api client
+			console.log(token,userDetails.password)
+		  const requestOutput =  await props.client.resetPassword(token, {password: userDetails.password})
+			console.log(requestOutput);
+			toastr[requestOutput.data.status](requestOutput.data.message, requestOutput.data.title);
+			if (requestOutput.data.status === "success") {
+				navigateTo("/login");
+			}
 		} catch (e) {
 			toastr["error"](
-				"An error occurred attempting to reset your password. If the error continues please contact us directly.",
+				e.message,
 				"Error!"
 			)
 		  
@@ -81,6 +88,7 @@ const ResetPassword = (props) => {
 								>
 										<div className="form-group">
 											<input
+											  autoFocus
 												className="form-control"
 												name="password"
 												type="password"
@@ -95,7 +103,7 @@ const ResetPassword = (props) => {
 												className="form-control"
 												name="confirm"
 												type="password"
-												value={userDetails.password}
+												value={userDetails.confirm}
 												placeholder="Confirm password..."
 												onChange={(event) => changeHandler(event)}
 											></input>

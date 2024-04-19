@@ -136,6 +136,6 @@ export class ApiClient {
 	}
 
 	resetPassword(token, data){
-		return this.apiCall("post",`${url}reset-password${token}`,data)
+		return this.apiCall("post",`${url}reset-password/${token}`, data)
 	}
 }

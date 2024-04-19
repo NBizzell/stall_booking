@@ -283,7 +283,7 @@ const App = () => {
 				</Route>
 				
 				<Route 
-					path="/reset" 
+					path="/reset/*" 
 					element={<ResetPassword client={client}/>} 
 				/>
 			
